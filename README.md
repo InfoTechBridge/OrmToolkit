@@ -23,7 +23,8 @@
 ## Installation
 
 OrmToolkit Nuget packages are available in nuget.org.
-These packages contain both .NET Framework v4.5 and .NET Standard 2.0 versions and supports both .NET Framework and .NET Core projects.
+
+These packages contain both .NET Framework v4.5 and .NET Standard 2.0 versions and supporting both .NET Framework and .NET Core projects.
 
 * **SQL Server**
 ```
@@ -36,7 +37,34 @@ Install-Package ORMToolkit.OracleOdp
 ```
 
 * **Oracle ODP Managed**
-```
+``` pm
 Install-Package ORMToolkit.OracleOdpManaged
 ```
 
+## Usage
+OrmToolkit provides typed API's for database querying from simple lambda expressions to more complex typed LINQ SQL Expressions which you can use to construct more complex queries.
+
+## LINQ Querying
+
+Use LINQ to generate the ad-hoc SQL select queries.
+
+``` SQL
+public class Person
+{
+    public Int ID { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+}
+```
+
+``` SQL
+var query = from d in new Query<Person>()
+            where d.FirstName.Contains("C")
+                 && d.Age > 18
+            orderby d.FirstName
+            select new {
+                id = d.ID,
+                firstName = d.FirstName
+            };
+```
