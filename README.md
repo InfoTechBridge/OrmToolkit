@@ -59,12 +59,11 @@ public class Person
 ```
 
 ``` SQL
-var query = from d in new Query<Person>()
-            where d.FirstName.Contains("C")
-                 && d.Age > 18
-            orderby d.FirstName
+var query = from p in new Query<Person>()
+            where p.FirstName.Contains("C") && p.Age > 18
+            orderby p.FirstName
             select new {
-                id = d.ID,
-                firstName = d.FirstName
+                id = p.ID,
+                firstName = p.FirstName
             };
 ```
